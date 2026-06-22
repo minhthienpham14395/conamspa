@@ -1,0 +1,23 @@
+---
+import { siteConfig } from "../data/site";
+---
+
+<section id="map" class="py-12 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-2xl font-semibold">Địa chỉ</h2>
+    <div class="mt-4 grid gap-6 md:grid-cols-2">
+      <div>
+        <div class="font-semibold">{siteConfig.name}</div>
+        <div class="text-sm text-stone-600 mt-1">{siteConfig.address}</div>
+        <div class="mt-2">SĐT: <a href={`tel:${siteConfig.phone}`} class="text-indigo-700">{siteConfig.phone}</a></div>
+        <div class="mt-1">Giờ mở cửa: {siteConfig.openingHours}</div>
+        <div class="mt-2"><a href={siteConfig.googleMapUrl} target="_blank" class="text-indigo-700">Xem trên Google Map</a></div>
+      </div>
+      <div>
+        <a href={siteConfig.googleMapUrl} target="_blank">
+          <img src="https://images.pexels.com/photos/7038236/pexels-photo-7038236.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Khu vực spa CoNamSpa" class="w-full h-64 object-cover rounded" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

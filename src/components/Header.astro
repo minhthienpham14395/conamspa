@@ -1,0 +1,19 @@
+---
+import { siteConfig } from "../data/site";
+---
+
+<header class="sticky top-0 bg-white/80 backdrop-blur z-40">
+  <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+    <div class="text-xl font-semibold text-indigo-900">{siteConfig.name}</div>
+     <nav class="hidden md:flex gap-6 text-indigo-700">
+       <a href="#about" class="hover:underline">Giới thiệu</a>
+       <a href="#services" class="hover:underline">Dịch vụ</a>
+       <a href="#pricing" class="hover:underline">Bảng giá</a>
+       <a href="#gallery" class="hover:underline">Hình ảnh</a>
+       <a href="#faq" class="hover:underline">FAQ</a>
+     </nav>
+     <div class="flex items-center gap-3">
+       <a href={siteConfig.bookingUrl} class="bg-indigo-700 hover:bg-indigo-800 text-white px-4 py-2 rounded">Đặt lịch</a>
+    </div>
+  </div>
+</header>

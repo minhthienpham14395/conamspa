@@ -1,0 +1,17 @@
+---
+import { faqs } from "../data/faqs";
+---
+
+<section id="faq" class="py-12">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-2xl font-semibold">Câu hỏi thường gặp</h2>
+    <div class="mt-6 space-y-4">
+      {faqs.map((f) => (
+        <details class="bg-white p-4 rounded shadow-sm" key={f.question}>
+          <summary class="font-semibold">{f.question}</summary>
+          <div class="mt-2 text-stone-600">{f.answer}</div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

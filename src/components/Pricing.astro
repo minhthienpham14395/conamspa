@@ -1,0 +1,22 @@
+---
+import { prices } from "../data/prices";
+---
+
+<section id="pricing" class="py-12 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-2xl font-semibold">Bảng giá</h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+      {prices.map((p) => (
+        <div class="bg-white p-4 rounded shadow-sm" key={p.name}>
+          <div class="font-semibold">{p.name}</div>
+          <div class="mt-2 text-indigo-700 font-bold">{p.price}</div>
+          <div class="text-sm text-stone-600 mt-2">{p.note}</div>
+          <div class="mt-4">
+            <a href="/" class="bg-indigo-700 hover:bg-indigo-800 text-white px-3 py-1 rounded">Đặt lịch</a>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p class="mt-4 text-sm text-stone-500">Giá có thể thay đổi tùy tình trạng/lựa chọn dịch vụ.</p>
+  </div>
+</section>

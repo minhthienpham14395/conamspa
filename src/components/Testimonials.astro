@@ -1,0 +1,17 @@
+---
+import { testimonials } from "../data/testimonials";
+---
+
+<section id="testimonials" class="py-12 bg-gray-50">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-2xl font-semibold">Phản hồi khách hàng</h2>
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      {testimonials.map((t) => (
+        <blockquote class="bg-white p-4 rounded shadow-sm" key={t.name}>
+          <div class="font-semibold">{t.name} — <span class="text-stone-500 text-sm">{t.service}</span></div>
+          <p class="mt-2 text-stone-600">{t.text}</p>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>

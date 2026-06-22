@@ -1,0 +1,517 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import { siteConfig } from "../data/site";
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+
+const promotionDirectory = join(process.cwd(), "public", "images", "uudai");
+const promotionImages = readdirSync(promotionDirectory)
+  .filter((file) => /\.(avif|jpe?g|png|webp)$/i.test(file))
+  .sort()
+  .map((file, index) => ({
+    src: `/images/uudai/${file}`,
+    alt: `Ưu đãi dịch vụ Cô Năm Spa ${index + 1}`,
+  }));
+
+const testimonials = [
+  {
+    text: "Một không gian tuyệt vời để trốn khỏi sự ồn ào của phố thị. Liệu trình chăm sóc da mặt với trà xanh thực sự đã giúp làn da tôi hồi sinh. Đội ngũ nhân viên vô cùng tận tâm và chuyên nghiệp.",
+    initial: "K",
+    name: "Khánh Linh",
+    role: "Nghệ sĩ tự do",
+  },
+  {
+    text: "Liệu trình mát-xa đá muối Himalaya thực sự là một trải nghiệm độc đáo. Cảm giác thư giãn sâu mà không nơi nào có được. Tôi sẽ quay lại.",
+    initial: "M",
+    name: "Minh Châu",
+    role: "Giám đốc tiếp thị",
+  },
+  {
+    text: "Không gian đẹp, yên tĩnh, sản phẩm thuần thiên nhiên. Sau mỗi buổi chăm sóc, da tôi thực sự khỏe và sáng hơn rõ rệt.",
+    initial: "T",
+    name: "Thu Trang",
+    role: "Bác sĩ",
+  },
+];
+
+const serviceGroups = [
+  {
+    id: "goi-dau",
+    eyebrow: "Chăm sóc tóc",
+    title: "Dịch Vụ Gội Đầu",
+    description: "Từ gội thư giãn nhẹ nhàng đến liệu trình chuyên sâu chăm sóc da đầu, mặt và cổ vai gáy.",
+    services: [
+      {
+        name: "Gội Thư Giãn",
+        duration: "30 phút",
+        price: "79.000đ",
+        details: "Tẩy trang · Rửa mặt · Mát-xa đầu khô · Chườm túi thảo dược · Gội đầu 2 lần · Ủ xả tóc · Dưỡng tóc · Sấy tóc",
+      },
+      {
+        name: "Gội Thư Giãn",
+        duration: "40 phút",
+        price: "129.000đ",
+        details: "Tẩy trang · Rửa mặt · Mát-xa mặt · Mát-xa đầu khô · Chườm túi thảo dược · Gội đầu 2 lần · Ủ xả tóc · Dưỡng tóc · Sấy tóc",
+      },
+      {
+        name: "Gội Thư Giãn",
+        duration: "50 phút",
+        price: "169.000đ",
+        details: "Tẩy trang · Rửa mặt · Mát-xa đầu khô · Mát-xa mặt · Mát-xa cổ vai gáy · Chườm túi thảo dược · Gội đầu 2 lần · Ủ xả tóc · Dưỡng tóc · Sấy tóc",
+      },
+      {
+        name: "Gội Chuyên Sâu",
+        duration: "60 phút",
+        price: "199.000đ",
+        details: "Tẩy trang · Rửa mặt · Mát-xa đầu khô · Mát-xa mặt · Mát-xa cổ vai gáy · Đắp mặt nạ thạch · Chườm túi thảo dược · Gội đầu 2 lần · Ủ xả tóc · Dưỡng tóc · Sấy tóc",
+      },
+      {
+        name: "Gội Chuyên Sâu",
+        duration: "80 phút",
+        price: "269.000đ",
+        details: "Tẩy trang · Rửa mặt · Mát-xa đầu khô · Mát-xa mặt · Mát-xa cổ vai gáy · Mát-xa tay · Đắp mặt nạ thạch · Chườm túi thảo dược · Gội đầu 2 lần · Ủ xả tóc · Dưỡng tóc · Sấy tóc",
+      },
+      {
+        name: "Gội Chuyên Sâu",
+        duration: "90 phút",
+        price: "369.000đ",
+        details: "Tẩy trang · Rửa mặt · Mát-xa đầu khô · Mát-xa mặt · Mát-xa cổ vai gáy · Mát-xa tay, chân · Đắp mặt nạ thạch · Chườm túi thảo dược · Gội đầu 2 lần · Ủ xả tóc · Dưỡng tóc · Sấy tóc. Dùng dầu gội nhập không tính phí.",
+      },
+    ],
+    extras: [
+      "Mặt nạ thạch Cool Bạc hà — 40.000đ",
+      "Mặt nạ cấp ẩm / Trẻ hoá / Trắng sáng — 60.000đ",
+      "Tẩy tế bào chết da mặt — 40.000đ",
+      "Tẩy tế bào chết da đầu — 40.000đ",
+      "Mát-xa mặt 10 phút — 50.000đ",
+      "Dầu gội nhập TIGI / Nexxus / Collagen — 40.000đ",
+      "Dầu gội thảo dược — 10.000đ",
+    ],
+  },
+  {
+    id: "mat-xa",
+    eyebrow: "Thư giãn & trị liệu",
+    title: "Dịch Vụ Mát-Xa",
+    description: "Liệu trình thư giãn và trị liệu được thiết kế theo từng vùng cơ thể và nhu cầu phục hồi.",
+    services: [
+      {
+        name: "Mát-Xa Thư Giãn Cổ Vai Gáy",
+        duration: "60 phút",
+        price: "290.000đ",
+        details: "Ngâm chân · Mát-xa lưng mặt úp: thắt lưng, cổ vai gáy, tay · Mát-xa mặt ngửa: tay, cổ vai gáy ngửa, đầu, mặt · Chườm nóng thảo dược · Lau khăn ấm",
+      },
+      {
+        name: "Mát-Xa Thư Giãn Cổ Vai Gáy",
+        duration: "90 phút",
+        price: "390.000đ",
+        details: "Liệu trình thư giãn chuyên sâu vùng lưng, cổ vai gáy, tay, đầu và mặt; kết hợp chườm nóng thảo dược.",
+      },
+      {
+        name: "Mát-Xa Thư Giãn Toàn Thân",
+        duration: "60 phút",
+        price: "320.000đ",
+        details: "Ngâm chân · Mát-xa toàn thân mặt úp: thắt lưng, cổ vai gáy, tay, chân và đá nóng lưng · Mát-xa mặt ngửa: tay, chân, đầu, mặt · Chườm nóng thảo dược · Lau khăn ấm",
+      },
+      {
+        name: "Mát-Xa Thư Giãn Toàn Thân",
+        duration: "90 phút",
+        price: "450.000đ",
+        details: "Liệu trình toàn thân kéo dài, chăm sóc kỹ vùng lưng, cổ vai gáy, tay, chân, đầu và mặt; kết hợp đá nóng và thảo dược.",
+      },
+      {
+        name: "Mát-Xa Toàn Thân Đá Nóng",
+        duration: "90 phút",
+        price: "480.000đ",
+        details: "Ngâm chân · Mát-xa toàn thân mặt úp và đá nóng toàn vùng · Mát-xa mặt ngửa: tay, chân, đầu, mặt · Chườm nóng thảo dược · Lau khăn ấm",
+      },
+      {
+        name: "Mát-Xa Trị Liệu Cổ Vai Gáy",
+        duration: "80 phút",
+        price: "550.000đ",
+        details: "Ngâm chân · Làm nóng dọc mạch bằng rượu thuốc · Khai huyệt · Trị liệu truy vết điểm đau tắt nghẽn thắt lưng, cổ vai gáy · Đá nóng · Chườm thảo dược · Mát-xa tay, đầu · Lau khăn nóng",
+      },
+      {
+        name: "Mát-Xa Trị Liệu Toàn Thân",
+        duration: "90 phút",
+        price: "650.000đ",
+        details: "Ngâm chân · Làm nóng dọc mạch bằng rượu thuốc · Khai huyệt · Trị liệu truy vết điểm đau toàn thân · Mát-xa tay, chân · Đá nóng · Đắp thuốc và chườm nóng thảo dược · Mát-xa đầu · Lau khăn nóng",
+      },
+    ],
+    extras: [
+      "Trượt giác & giác hơi 20 phút — 150.000đ",
+      "Đắp thuốc thảo dược — 100.000đ",
+    ],
+  },
+  {
+    id: "combo",
+    eyebrow: "Gói tiết kiệm",
+    title: "Dịch Vụ Combo",
+    description: "Kết hợp nhiều liệu trình trong một buổi để thư giãn trọn vẹn với mức giá ưu đãi hơn.",
+    services: [
+      {
+        name: "Gội Chuyên Sâu & Mát-Xa Tay Chân",
+        duration: "90 phút",
+        price: "329.000đ",
+        details: "Gội đầu chuyên sâu 60 phút kết hợp mát-xa thư giãn tay chân 30 phút.",
+      },
+      {
+        name: "Gội Chuyên Sâu & Mát-Xa Cổ Vai Gáy",
+        duration: "90 phút",
+        price: "329.000đ",
+        details: "Gội đầu chuyên sâu 60 phút kết hợp mát-xa thư giãn cổ vai gáy, lưng úp 30 phút.",
+      },
+      {
+        name: "Mát-Xa Cổ Vai Gáy & Gội Đầu",
+        duration: "90 phút",
+        price: "359.000đ",
+        details: "Mát-xa thư giãn cổ vai gáy 60 phút kết hợp các bước của gói gội đầu thư giãn 30 phút.",
+      },
+      {
+        name: "Mát-Xa Toàn Thân & Gội Đầu",
+        duration: "90 phút",
+        price: "369.000đ",
+        details: "Mát-xa thư giãn toàn thân 60 phút kết hợp các bước của gói gội đầu thư giãn 30 phút.",
+      },
+      {
+        name: "Mát-Xa Cổ Vai Gáy Kết Hợp Trị Liệu",
+        duration: "80 phút",
+        price: "429.000đ",
+        details: "Mát-xa cổ vai gáy 60 phút kết hợp trị liệu cổ vai gáy 20 phút: làm nóng dọc mạch và đẩy hàn khí.",
+      },
+      {
+        name: "Mát-Xa Toàn Thân Kết Hợp Trị Liệu",
+        duration: "90 phút",
+        price: "499.000đ",
+        details: "Mát-xa toàn thân 60 phút kết hợp trị liệu cổ vai gáy 30 phút: làm nóng dọc mạch và đẩy hàn khí.",
+      },
+    ],
+    extras: [],
+  },
+];
+---
+
+<MainLayout>
+  <header class="site-header hero-mode" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo" aria-label="Cô Năm Spa - Trang chủ">
+        <img src="/images/conam-logo.png" alt="Cô Năm - Tiệm Gội Đầu Thư Giãn" />
+      </a>
+      <nav class="main-nav" id="main-nav" aria-label="Điều hướng chính">
+        <ul class="nav-menu">
+          <li><a href="#sanctuary">Không Gian</a></li>
+          <li><a href="#services">Dịch Vụ</a></li>
+          <li><a href="#rituals">Liệu Trình</a></li>
+          <li><a href="#contact">Liên Hệ</a></li>
+        </ul>
+        <a href={siteConfig.bookingUrl} class="btn btn-primary nav-cta">Đặt Lịch Trị Liệu</a>
+      </nav>
+      <button class="mobile-menu-toggle" id="mobile-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Mở menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section" id="sanctuary" aria-label="Cô Năm Spa">
+      <div class="hero-bg">
+        <img
+          src="/images/hero/727457690_1059334386607528_499987599721631516_n.jpg"
+          alt="Không gian thực tế tại Cô Năm Spa"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero-content container">
+        <div class="hero-badge"><span>🌿</span><span>Chốn Bình Yên Cho Mọi Giác Quan · Thành Phố Hồ Chí Minh</span></div>
+        <h1 class="hero-title">Nơi Tâm Hồn Giao Thoa Cùng <em>Thiên Nhiên</em></h1>
+        <p class="hero-desc">Trải nghiệm liệu pháp chữa lành từ thiên nhiên, được chắt lọc qua hàng nghìn năm trí tuệ.</p>
+        <div class="hero-actions">
+          <a href={siteConfig.bookingUrl} class="btn btn-primary">Đặt Lịch Ngay</a>
+          <a href="#services" class="btn btn-ghost">Khám Phá Dịch Vụ</a>
+        </div>
+      </div>
+      <a class="hero-scroll" href="#services" aria-label="Khám phá dịch vụ"><span>Khám Phá</span></a>
+    </section>
+
+    <section class="treatments-section" id="services">
+      <div class="container">
+        <header class="treatments-header fade-in">
+          <span class="section-label">Bảng Giá Cô Năm Spa</span>
+          <h2 class="section-title">Dịch Vụ Chăm Sóc & Thư Giãn</h2>
+          <p class="section-desc">Chọn liệu trình phù hợp với thời gian và nhu cầu của bạn.</p>
+        </header>
+        <nav class="service-tabs" aria-label="Danh mục dịch vụ">
+          {serviceGroups.map((group, index) => (
+            <button
+              type="button"
+              class:list={["service-tab", { active: index === 0 }]}
+              data-service-tab={group.id}
+              aria-controls={group.id}
+              aria-selected={index === 0 ? "true" : "false"}
+            >
+              {group.title}
+            </button>
+          ))}
+        </nav>
+        <div class="service-catalog" id="service-slider">
+          {serviceGroups.map((group) => (
+            <section class="service-group" id={group.id} data-service-panel={group.id}>
+              <header class="service-group-header">
+                <div>
+                  <span class="section-label">{group.eyebrow}</span>
+                  <h3>{group.title}</h3>
+                </div>
+                <p>{group.description}</p>
+              </header>
+              <div class="service-list">
+                {group.services.map((service) => (
+                  <article class="service-item">
+                    <div class="service-item-top">
+                      <div>
+                        <h4>{service.name}</h4>
+                        <span class="service-duration">{service.duration}</span>
+                      </div>
+                      <strong>{service.price}</strong>
+                    </div>
+                    <p>{service.details}</p>
+                    <a href={siteConfig.bookingUrl} class="service-booking">Đặt lịch <span aria-hidden="true">→</span></a>
+                  </article>
+                ))}
+              </div>
+              {group.extras.length > 0 && (
+                <div class="service-extras">
+                  <h4>Dịch Vụ Thêm</h4>
+                  <ul>{group.extras.map((extra) => <li>{extra}</li>)}</ul>
+                </div>
+              )}
+            </section>
+          ))}
+        </div>
+        <div class="service-note">
+          <p>Thời lượng và quy trình có thể được điều chỉnh theo tình trạng thực tế. Vui lòng đặt lịch trước để được phục vụ tốt nhất.</p>
+          <a href={siteConfig.bookingUrl} class="btn btn-primary">Đặt Lịch Ngay</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="promotions-section" id="uu-dai">
+      <div class="container">
+        <header class="promotions-header fade-in">
+          <span class="section-label">Chương Trình Đặc Biệt</span>
+          <h2 class="section-title">Ưu Đãi Tại Cô Năm Spa</h2>
+          <p class="section-desc">Khám phá các liệu trình đang có mức giá ưu đãi và đặt lịch để giữ khung giờ phù hợp.</p>
+        </header>
+        <div class="promotions-grid">
+          {promotionImages.map((promotion) => (
+            <a
+              href={siteConfig.bookingUrl}
+              class="promotion-card fade-in"
+              aria-label={`${promotion.alt} - Đặt lịch ngay`}
+            >
+              <img src={promotion.src} alt={promotion.alt} loading="lazy" />
+              <span>Đặt Lịch Ngay</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section" id="rituals">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-visual fade-in">
+            <div class="about-video-main">
+              <video
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                poster="/images/about-main.jpg"
+                aria-label="Video giới thiệu không gian và dịch vụ Cô Năm Spa"
+              >
+                <source src="/videos/conam-spa.mp4" type="video/mp4" />
+                Trình duyệt của bạn không hỗ trợ phát video.
+              </video>
+            </div>
+            <!-- <div class="about-image-accent"><img src="/images/about-accent.jpg" alt="Sản phẩm tự nhiên" loading="lazy" /></div> -->
+          </div>
+          <div class="about-content fade-in">
+            <span class="about-tagline">Câu chuyện của chúng tôi</span>
+            <h2>Thấu Hiểu Tiếng Nói Từ Thiên Nhiên</h2>
+            <p>Tại Cô Năm Spa, chúng tôi tin rằng vẻ đẹp bền vững bắt nguồn từ sự hòa hợp với đất mẹ. Mỗi thành phần được sử dụng đều là thảo mộc hữu cơ, được tuyển chọn kỹ lưỡng từ những khu vườn bền vững.</p>
+            <p>Chúng tôi từ chối các hoạt chất mạnh, ưu tiên các liệu pháp đánh thức giác quan và nuôi dưỡng da bằng dưỡng chất một cách thuần khiết nhất.</p>
+            <div class="about-stats">
+              <div><div class="stat-number">98%</div><div class="stat-label">Hữu Cơ Thuần Khiết</div></div>
+              <div><div class="stat-number">8+</div><div class="stat-label">Năm Kinh Nghiệm</div></div>
+            </div>
+            <a href="https://conamspa.io.vn/ve-chung-toi" class="btn btn-secondary about-button">Tìm Hiểu Thêm</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials-section" aria-label="Cảm nhận khách hàng">
+      <div class="container">
+        <header class="testimonials-header fade-in">
+          <span class="section-label">Cảm Nhận</span>
+          <h2 class="section-title">Cảm Nhận Từ Trái Tim</h2>
+        </header>
+        <div class="testimonials-slider">
+          {testimonials.map((item, index) => (
+            <article class:list={["testimonial-item", { active: index === 0 }]} data-slide={index}>
+              <span class="quote-mark" aria-hidden="true">99</span>
+              <blockquote><p class="testimonial-text">“{item.text}”</p></blockquote>
+              <div class="testimonial-author">
+                <div class="author-avatar-placeholder">{item.initial}</div>
+                <div class="author-info"><div class="author-name">{item.name}</div><div class="author-role">{item.role}</div></div>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div class="testimonial-dots" role="tablist">
+          {testimonials.map((_, index) => <button class:list={["dot", { active: index === 0 }]} data-index={index} aria-label={`Cảm nhận ${index + 1}`}></button>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="cta-bg"><img src="/images/cta-bg.jpg" alt="" loading="lazy" /></div>
+      <div class="cta-content">
+        <h2>Sẵn Sàng Cho Hành Trình Chữa Lành?</h2>
+        <p>Đặt lịch hẹn ngay hôm nay để được tư vấn miễn phí và chọn lựa giải pháp chăm sóc sức khoẻ tốt nhất cho bạn.</p>
+        <a href={siteConfig.bookingUrl} class="btn btn-ghost">Đặt Lịch Hẹn Ngay</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="/" class="footer-logo" aria-label="Cô Năm Spa - Trang chủ">
+            <img src="/images/conam-logo.png" alt="Cô Năm - Tiệm Gội Đầu Thư Giãn" loading="lazy" />
+          </a>
+          <p>Không gian chăm sóc và chữa lành từ thiên nhiên.</p>
+          <div class="footer-social">
+            <a href={`mailto:${siteConfig.email}`} class="social-link" aria-label="Gửi Gmail cho Cô Năm Spa">✉</a>
+            <a href={siteConfig.facebookUrl} class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook Cô Năm Spa">f</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Dịch Vụ</h4>
+          <ul>
+            <li><a href={siteConfig.servicesUrl}>Mát-xa Trị Liệu</a></li>
+            <li><a href={siteConfig.servicesUrl}>Chăm Sóc Da Mặt</a></li>
+            <li><a href="#rituals">Liệu Trình Toàn Thân</a></li>
+            <li><a href={siteConfig.servicesUrl}>Gói Dịch Vụ Đặc Biệt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Về Chúng Tôi</h4>
+          <ul>
+            <li><a href="#">Phát Triển Bền Vững</a></li>
+            <li><a href="#">Nghề Nghiệp</a></li>
+            <li><a href="#">Chính Sách Bảo Mật</a></li>
+            <li><a href="#">Điều Khoản Dịch Vụ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Liên Hệ</h4>
+          <div class="footer-contact-item">
+            <span>📍</span>
+            <a href={siteConfig.googleMapUrl} target="_blank" rel="noopener noreferrer" aria-label="Xem địa chỉ Cô Năm Spa trên Google Maps">
+              {siteConfig.address}
+            </a>
+          </div>
+          <div class="footer-contact-item"><span>📞</span><a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneDisplay}</a></div>
+          <div class="footer-contact-item">
+            <span>💬</span>
+            <a href={siteConfig.zaloUrl} target="_blank" rel="noopener noreferrer">Nhắn tin qua Zalo</a>
+          </div>
+          <div class="footer-contact-item"><span>✉</span><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></div>
+          <div class="footer-contact-item">
+            <span>ⓕ</span>
+            <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer">facebook.com/conamspa</a>
+          </div>
+          <div class="footer-contact-item"><span>🕐</span><span>{siteConfig.openingHours}</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Cô Năm Spa. Chốn Bình Yên Cho Mọi Giác Quan.</p>
+        <div><a href="#">Chính Sách Bảo Mật</a><a href="#">Điều Khoản Dịch Vụ</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const header = document.querySelector("#site-header");
+    const toggle = document.querySelector("#mobile-toggle");
+    const nav = document.querySelector("#main-nav");
+    const updateHeader = () => {
+      const scrolled = window.scrollY > 24;
+      header?.classList.toggle("scrolled", scrolled);
+      header?.classList.toggle("hero-mode", !scrolled);
+    };
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    toggle?.addEventListener("click", () => {
+      const isOpen = nav?.classList.toggle("open") ?? false;
+      toggle.classList.toggle("open", isOpen);
+      toggle.setAttribute("aria-expanded", String(isOpen));
+      document.body.classList.toggle("menu-open", isOpen);
+    });
+    nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      toggle?.classList.remove("open");
+      toggle?.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    }));
+
+    const slides = [...document.querySelectorAll(".testimonial-item")];
+    const dots = [...document.querySelectorAll(".dot")];
+    const showSlide = (index) => {
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+    };
+    dots.forEach((dot, index) => dot.addEventListener("click", () => showSlide(index)));
+
+    const serviceSlider = document.querySelector("#service-slider");
+    const serviceTabs = [...document.querySelectorAll("[data-service-tab]")];
+    const servicePanels = [...document.querySelectorAll("[data-service-panel]")];
+    const setActiveServiceTab = (id) => {
+      serviceTabs.forEach((tab) => {
+        const active = tab.getAttribute("data-service-tab") === id;
+        tab.classList.toggle("active", active);
+        tab.setAttribute("aria-selected", String(active));
+        if (active) tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      });
+    };
+    serviceTabs.forEach((tab) => tab.addEventListener("click", () => {
+      const id = tab.getAttribute("data-service-tab");
+      const panel = id ? document.getElementById(id) : null;
+      if (panel && serviceSlider) {
+        serviceSlider.scrollTo({ left: panel.offsetLeft, behavior: "smooth" });
+        setActiveServiceTab(id);
+      }
+    }));
+    if (serviceSlider) {
+      let serviceScrollTimer;
+      serviceSlider.addEventListener("scroll", () => {
+        window.clearTimeout(serviceScrollTimer);
+        serviceScrollTimer = window.setTimeout(() => {
+          const current = servicePanels.reduce((closest, panel) => {
+            const distance = Math.abs(panel.offsetLeft - serviceSlider.scrollLeft);
+            return distance < closest.distance ? { panel, distance } : closest;
+          }, { panel: servicePanels[0], distance: Number.POSITIVE_INFINITY });
+          const id = current.panel?.getAttribute("data-service-panel");
+          if (id) setActiveServiceTab(id);
+        }, 80);
+      }, { passive: true });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("visible"));
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".fade-in").forEach((item) => observer.observe(item));
+  </script>
+</MainLayout>
