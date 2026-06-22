@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://conamspa.vercel.app',
+  site: 'https://conamspa.io.vn',
 });
