@@ -6,7 +6,7 @@ export const services = [
     image: "https://images.pexels.com/photos/4031683/pexels-photo-4031683.jpeg?auto=compress&cs=tinysrgb&w=800",
   },
   {
-    title: "Mát-xa thư giãn",
+    title: "Massage thư giãn",
     description: "Liệu trình thư giãn cơ thể, giảm căng thẳng và phục hồi năng lượng.",
     price: "Từ 450.000đ",
     image: "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=800",
